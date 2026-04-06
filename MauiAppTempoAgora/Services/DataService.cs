@@ -69,6 +69,14 @@ namespace MauiAppTempoAgora.Services
                         sunset = sunset.ToString("dd/MM/yyyy HH:mm")
                     }; // Fecha obj do Tempo.
                 } // Fecha if se o status do servidor foi de sucesso
+                else if (resp.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    throw new Exception("Cidade não encontrada. Verifique o nome e tente novamente.");
+                }  //fecha loop de cidade não encontrada
+                else
+                {
+                    throw new Exception("Erro ao consultar o clima. Tente mais tarde.");
+                } // fecha loop de internet não disponível
             } // fecha laço using
 
             return t;
